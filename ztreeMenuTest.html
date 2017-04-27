@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		<title>兔子 の test html</title>
+		<link rel="stylesheet" href="jquery-ztree/css/zTreeStyle/zTreeStyle.min.css" />
+
+
+		<link rel="stylesheet" href="ztreeMenuStyle.css" />
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+
+		<script src="jquery-ztree/js/jquery-1.4.4.min.js"></script>
+		<script src="jquery-ztree/js/jquery.ztree.core.min.js"></script>
+		<script src="jquery-ztree/js/jquery.ztree.excheck.min.js"></script>
+		<script src="jquery-ztree/js/jquery.ztree.exedit.min.js"></script>
+
+
+		<script src="ztreeMenu.core.js"></script>
+
+		<style type="text/css">
+
+		</style>
+	</head>
+	<body>
+    	<div id="menutree1" style="width: 300px"></div>
+	</body>
+</html>
+	
+
+<script type="text/javascript">
+	
+	var setting = {
+		id:'menutree1',
+		name:'bankId',
+		url:'${sys}/company/wallet/getbanklist?id=${id}',
+		altname:'bankName',
+		ifrequired:'required',
+		defaultValue:'***',
+		dataloaded:function(){
+			console.log('dataload');
+		}
+	}
+	new treeMenu(setting);
+</script>
+
+
+
+
+
+
+
+
+
+

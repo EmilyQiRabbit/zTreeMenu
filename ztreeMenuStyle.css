@@ -1,0 +1,187 @@
+/*树结构
+================================================================*/
+.ztree-basic {
+	background: #fff;
+	overflow: auto;
+}
+
+.ztree-basic .ztree {
+	padding: 10px 10px 10px 20px;
+}
+
+.ztree-basic li a {
+	padding-top: 0;
+	height: auto;
+	color: #333;
+	border: 1px solid transparent;
+}
+
+.ztree-basic li a:hover {
+	text-decoration: none;
+	border-color: #ececec;
+	background: #ececec;
+}
+
+.ztree-basic li a.curSelectedNode {
+	height: auto;
+	color: #000;
+	border: 1px solid #ffb951;
+	background-color: #ffe6b0;
+	opacity: 0.8;
+}
+
+.ztree-basic li a span.button {
+	margin-right: 2px!important;
+	color: #36a8e2;
+}
+/*树状选择菜单:单选*/
+.myMenu .form-control{
+	background:#fff;
+	height: 30px;
+    padding: 0 12px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    box-shadow: none;
+    display: table-cell;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+.myMenu .dropdown-menu .menuButtonBar .dropdown-cfm{
+	color:black;
+	font-size:10px;
+	font-family:"微软雅黑";
+	position:absolute;
+	right:10px;
+	top:-3px;
+}
+.myMenu .dropdown-menu .menuButtonBar .dropdown-cfm:hover{
+	color:black;
+}
+.myMenu .dropdown-cnl{
+	color:black;
+	font-size:10px;
+	font-family:"微软雅黑";
+	position:absolute;
+	right:50px;
+	top:-3px;
+}
+.myMenu .dropdown-menu .menuButtonBar .dropdown-cnl:hover{
+	color:black;
+}
+.myMenu .dropdown-menu .menuButtonBar{
+	position:relative;
+	height:25px;
+	line-height: 30px;
+	width:100%;
+	border-top:1px #ccc solid;
+}
+.myMenu .dropdown-menu{
+	display: none;
+	width:100%;
+	border:1px solid #ccc;
+	border-radius:0;
+	margin:0!important;
+	min-width:100px;
+	height:auto;
+	padding:0;
+}
+.myMenu .dropdown-menu .treeMenu{
+	max-height: 200px;
+    min-height: 130px;
+	overflow:auto;
+}
+.myMenu .ztree-basic li a span.button {
+	margin-right: 0!important;
+}
+.myMenu .ztree-basic li span.button.center_open, .myMenu .ztree-basic li span.button.center_close, .myMenu .ztree-basic li span.button.roots_close, .myMenu .ztree-basic li span.button.roots_open, .myMenu .ztree-basic li span.button.bottom_close, .myMenu .ztree-basic li span.button.bottom_open{
+	width:10px;
+}
+.myMenu .ztree li span.button.chk{
+	margin:0;
+	margin-top:3px;
+}
+.myMenu .ztree li span.button.switch{
+	width:14px;
+}
+.myMenu .ztree li ul{
+	padding-left:14px;
+}
+/*树状选择菜单:多选*/
+.myMenu .validate_tool{
+	position:absolute;
+	z-index:-1;
+}
+.myMenu .input-group{
+	width:100%;
+	position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.myMenu .input-group-addon{
+	display: table-cell;
+	color: #555!important;
+    border-radius: 0;
+    cursor: pointer;
+    border-left: 0;
+    padding: 6px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: right;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-collapse: separate;
+    box-sizing: border-box;
+}
+.menu_tip{
+	color:#9C9C9C;
+}
+.item_choised_pres{
+	background:#fff;
+	height:auto;
+	max-height:78px;
+	min-height:30px;
+	width:100%;
+	padding:0 0 0 12px;
+	border:1px #CCCCCC solid;
+	font-size:12px;
+	line-height:28px;
+	font-family:"微软雅黑";
+	overflow:auto;
+	vertical-align:middle;
+}
+.menu_items{
+	background:#E4E4E4;
+	border-radius:3px;
+	border:1px #CCCCCC solid;
+	height:20px;
+	line-height:18px;
+	display:block;
+	float:left;
+	padding:0 3px;
+	margin:4px 4px 0 0;
+	cursor:default;
+	max-width:105px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.menu_items:last-child{
+	margin-bottom:4px;
+}
+.menu_items_del{
+	margin-right:2px;
+	cursor:pointer;
+}
+.form-group>.myMenu .item_choised_pres{
+	border:0!important;
+	min-height:28px;
+	max-height:28px;
+}
