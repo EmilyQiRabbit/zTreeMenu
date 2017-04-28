@@ -59,6 +59,7 @@
 		this.altname = settings.altname;
 		this.dataloadedfunc = settings.dataloaded;
 		this.menuBody = menuBody(settings.id,settings.name,settings.ifvalidate,settings.defaultLable,settings.defaultValue);
+		this.defaultValue = settings.defaultValue;
 		var treethis = this;
 		$("#"+this.id).append(this.menuBody);
 		this.unload = true;
@@ -100,10 +101,10 @@
 		// 点击加载数据
 		var thistree = this;
 		$.get(url, function(zNodes){
-			// 初始化树结构
+			////初始化树结构
 			// zNodes = [
 			// 	{
-			// 		id : Math.random(),
+			// 		id : '******',
 			// 		bankName : "111"
 			// 	},
 			// 	{
@@ -121,18 +122,23 @@
 			// 		]
 			// 	},
 			// ]
-
-			
 			//console.log(zNodes);
 			thistree.treeul = thistree.menuBody.find("#menuTree-"+thistree.id);
+			if(thistree.dataloadedfunc){
+				thistree.dataloadedfunc();
+			}
 			// 修改名称字段
-			thistree.dataloadedfunc();
 			if(thistree.altname){
 				zNodes.forEach(function(node){
 					node.name = node[thistree.altname];
 				});
 			}
 			thistree.tree = $.fn.zTree.init(thistree.treeul, setting, zNodes);
+			// 默认选中
+			if(thistree.defaultValue){
+				var node = thistree.tree.getNodeByParam("id", thistree.defaultValue, null);
+				thistree.tree.selectNode(node);
+			}
 			thistree.unload = false;
 		});
 	}
