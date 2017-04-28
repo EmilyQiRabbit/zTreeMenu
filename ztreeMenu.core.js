@@ -1,17 +1,17 @@
 
 (function(){
-	function menuBody(name,ifrequired,defaultValue){ 
+	function menuBody(id,name,ifvalidate,defaultLable,defaultValue){ 
 		var htmlstr = '<div class="dropdown myMenu">'+
-			'<div class="input-group" data-first="1">'+
-				'<input type="text" readonly="readonly" class="form-control validate_spical '+ifrequired+'" value="'+defaultValue+'"/>'+ 
-				'<input id="hideTreeId" name="' + name + '" class="${cssClass}" type="hidden" value="${value}"/> '+
+			'<div class="input-group">'+
+				'<input type="text" readonly="readonly" class="form-control validate_spical '+ifvalidate+'" value="'+defaultLable+'"/>'+ 
+				'<input name="' + name + '" type="hidden" value="'+defaultValue+'"/> '+
 				'<span class="input-group-addon"> '+
 					'<i class="fa fa-angle-down"></i>'+
 				'</span>'+
 			'</div>'+
 			'<div class="dropdown-menu">'+
 				'<div class="treeMenu">'+
-					'<ul class="menuTree ztree ztree-basic" style="min-height: 0"></ul>'+
+					'<ul id="menuTree-'+ id +'" class="ztree ztree-basic" style="min-height: 0"></ul>'+
 				'</div>'+
 				'<div class="menuButtonBar menubuttons">'+
 					'<a class="dropdown-cfm">确定</a>'+
@@ -28,9 +28,9 @@
 //		check:{enable:"${checked}",nocheckInherit:true},
 		data:{simpleData:{enable:true}},
 		callback:{
-//			onClick:function(event, treeId, treeNode){
-//				tree.expandNode(treeNode);
-//			},
+			onClick:function(event, treeId, treeNode){
+				console.log(treeId);
+			},
 //			onCheck: function(e, treeId, treeNode){
 //				var nodes = tree.getCheckedNodes(true);
 //				for (var i=0, l=nodes.length; i<l; i++) {
@@ -58,7 +58,7 @@
 		this.id = settings.id;
 		this.altname = settings.altname;
 		this.dataloadedfunc = settings.dataloaded;
-		this.menuBody = menuBody(settings.name,settings.ifrequired,settings.defaultValue);
+		this.menuBody = menuBody(settings.id,settings.name,settings.ifvalidate,settings.defaultLable,settings.defaultValue);
 		var treethis = this;
 		$("#"+this.id).append(this.menuBody);
 		this.unload = true;
@@ -81,7 +81,11 @@
 		this.menuBody.find('.dropdown-cfm').click(function(){
 			treethis.clickOkButton();
 		});
+		this.menuBody.find('.dropdown-cnl').click(function(){
+			treethis.clickCancelButton();
+		});
 	}
+	
 	treeMenu.prototype.clickToDisapear = function(){
 		$(document).click(function()
 		{
@@ -95,22 +99,34 @@
 	treeMenu.prototype.loadAjaxData = function(url){
 		// 点击加载数据
 		var thistree = this;
-		// $.get(url, function(zNodes){
-			zNodes = [
-				{id:'1233211234567',
-				bankName:'backName'},
-				{id:'1233211234567',
-				bankName:'backName'},
-				{id:'1233211234567',
-				bankName:'backName',children:[
-					{id:'1233211234567',
-					name:'backName'}
-				]}
-			]
+		$.get(url, function(zNodes){
 			// 初始化树结构
+			// zNodes = [
+			// 	{
+			// 		id : Math.random(),
+			// 		bankName : "111"
+			// 	},
+			// 	{
+			// 		id : Math.random(),
+			// 		bankName : "222"
+			// 	},
+			// 	{
+			// 		id : Math.random(),
+			// 		bankName : "333",
+			// 		children : [
+			// 			{
+			// 				id : Math.random(),
+			// 				name : "333111"
+			// 			}
+			// 		]
+			// 	},
+			// ]
+
+			
 			//console.log(zNodes);
-			thistree.treeul = thistree.menuBody.find(".menuTree");
+			thistree.treeul = thistree.menuBody.find("#menuTree-"+thistree.id);
 			// 修改名称字段
+			thistree.dataloadedfunc();
 			if(thistree.altname){
 				zNodes.forEach(function(node){
 					node.name = node[thistree.altname];
@@ -118,8 +134,7 @@
 			}
 			thistree.tree = $.fn.zTree.init(thistree.treeul, setting, zNodes);
 			thistree.unload = false;
-			thistree.dataloadedfunc();
-		// });
+		});
 	}
 	
 	treeMenu.prototype.clickOkButton = function(){
@@ -148,6 +163,12 @@
 		this.menuBody.find("input[type=text]").attr("value",names.join(","));
 		this.menuBody.find("input[type=hidden]").attr("value",ids.join(",").replace(/u_/ig,""));
 		this.menuBody.find(".dropdown-menu").hide();
+	}
+	
+	treeMenu.prototype.clickCancelButton = function(){
+		this.menuBody.find("input[type=text]").attr("value",'');
+		this.menuBody.find("input[type=hidden]").attr("value",'');
+		this.tree.cancelSelectedNode();
 	}
 	
 })()

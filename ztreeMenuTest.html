@@ -19,11 +19,15 @@
 		<script src="ztreeMenu.core.js"></script>
 
 		<style type="text/css">
-
+			.testclass{
+				float:left;
+				margin-right: 10px;
+			}
 		</style>
 	</head>
 	<body>
-    	<div id="menutree1" style="width: 300px"></div>
+    	<div id="menutree1" class="testclass" style="width: 300px"></div>
+    	<div id="menutree2" class="testclass" style="width: 300px"></div>
 	</body>
 </html>
 	
@@ -31,17 +35,31 @@
 <script type="text/javascript">
 	
 	var setting = {
-		id:'menutree1',
-		name:'bankId',
+		id:'menutree1',// 整个组件的容器ID
+		name:'bankId',//input作为表单提交时的name
 		url:'${sys}/company/wallet/getbanklist?id=${id}',
-		altname:'bankName',
-		ifrequired:'required',
-		defaultValue:'***',
-		dataloaded:function(){
-			console.log('dataload');
+		altname:'bankName',// 如果ajax传回的数据中，需要作为名称显示的键值不是‘name’，需要设置此项
+		ifvalidate:'required',// input是否需验证，如果不需要，请填写''，如果需要，填写一个类名来帮助你你进行验证，例如，如果你使用validate插件，填写required
+		defaultLable:'***',// 显示的input的初始值
+		defaultValue:'******',// 隐藏的input的初始value，应该与defaultLable对应
+		dataloaded:function(){// 数据加载后／树生成前就会调用的方法
+			console.log('dataload1');
 		}
 	}
 	new treeMenu(setting);
+	var setting2 = {
+		id:'menutree2',// 整个组件的容器ID
+		name:'bankId',//input作为表单提交时的name
+		url:'${sys}/company/wallet/getbanklist?id=${id}',
+		altname:'bankName',// 如果ajax传回的数据中，需要作为名称显示的键值不是‘name’，需要设置此项
+		ifvalidate:'required',// input是否需验证，如果不需要，请填写''，如果需要，填写一个类名来帮助你你进行验证，例如，如果你使用validate插件，填写required
+		defaultLable:'***',// 显示的input的初始值
+		defaultValue:'******',// 隐藏的input的初始value，应该与defaultLable对应
+		dataloaded:function(){// 数据加载后／树生成前就会调用的方法
+			console.log('dataload2');
+		}
+	}
+	new treeMenu(setting2);
 </script>
 
 
